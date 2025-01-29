@@ -42,80 +42,12 @@
           class="profile__btn-add"
         />
       </section>
-      <section class="cards">
-        <!-- carta 1 -->
-        <div class="card">
-          <img
-            src="./images/YosemiteValley.jpg"
-            alt="Yosemite Valley"
-            class="card__image"
-          />
-          <div class="card__info">
-            <p class="card__text">Yosemite Valley</p>
-            <button class="card__btn-like"></button>
-          </div>
-        </div>
-        <!-- carta 2 -->
-        <div class="card">
-          <img
-            src="./images/LakeLouise.png"
-            alt="Lago Louise"
-            class="card__image"
-          />
-          <div class="card__info">
-            <p class="card__text">Lago Louise</p>
-            <button class="card__btn-like"></button>
-          </div>
-        </div>
-        <!-- carta 3 -->
-        <div class="card">
-          <img
-            src="./images/BaldMountains.png"
-            alt="Bald Mountains"
-            class="card__image"
-          />
-          <div class="card__info">
-            <p class="card__text">Bald Mountains</p>
-            <button class="card__btn-like"></button>
-          </div>
-        </div>
-        <!-- carta 4 -->
-        <div class="card">
-          <img src="./images/Latermar.png" alt="Latermar" class="card__image" />
-          <div class="card__info">
-            <p class="card__text">Latermar</p>
-            <button class="card__btn-like"></button>
-          </div>
-        </div>
-        <!-- carta 5 -->
-        <div class="card">
-          <img
-            src="./images/VanoiseNational.png"
-            alt="Vanoise National"
-            class="card__image"
-          />
-          <div class="card__info">
-            <p class="card__text">Vanoise National</p>
-            <button class="card__btn-like"></button>
-          </div>
-        </div>
-        <!-- carta 6 -->
-        <div class="card">
-          <img
-            src="./images/LagodiBraies.png"
-            alt="Lago di Braies"
-            class="card__image"
-          />
-          <div class="card__info">
-            <p class="card__text">Lago di Braies</p>
-            <button class="card__btn-like"></button>
-          </div>
-        </div>
-      </section>
+      <section class="cards"></section>
     </main>
     <footer class="footer">
       <p class="footer__copyright">&copy;2024 Skondz</p>
     </footer>
+
     <!-- popup -->
     <div class="popup" id="popup__profile">
       <div class="popup__container">
@@ -150,6 +82,7 @@
         </form>
       </div>
     </div>
+
     <!-- PopUp Add Image -->
     <div class="popup" id="popup__add">
       <div class="popup__container">
@@ -184,6 +117,20 @@
         </form>
       </div>
     </div>
+
+    <!-- Template -->
+    <template class="template__card">
+      <div class="card">
+        <img src="" alt="" class="card__image" />
+        <div class="card__info">
+          <p class="card__text"></p>
+          <button class="card__btn-delete"></button>
+          <button class="card__btn-like"></button>
+        </div>
+      </div>
+    </template>
+
+    <!-- sripts -->
     <script src="./sript.js"></script>
   </body>
 </html>

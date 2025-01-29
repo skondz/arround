@@ -12,6 +12,7 @@
   width: 282px;
   height: 361px;
   overflow: hidden;
+  position: relative;
 }
 .card__text {
   color: #000;
@@ -54,6 +55,22 @@
 }
 .card__btn-like-active {
   background-image: url(../images/Like_hov.svg);
+}
+
+.card__btn-delete {
+  position: absolute;
+  width: 18px;
+  height: 19.3px;
+  top: 18px;
+  right: 15px;
+  background-image: url(../images/Trash.svg);
+  background-repeat: no-repeat;
+  border: none;
+  background-color: transparent;
+  cursor: pointer;
+}
+.card__btn-delete:hover {
+  opacity: 60%;
 }
 
 @media screen and (max-width: 880px) {
