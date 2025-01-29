@@ -10,6 +10,10 @@ const btnOpenAdd = document.querySelector(".profile__btn-add");
 const popupAdd = document.querySelector("#popup__add");
 const templateElement = document.querySelector(".template__card");
 const album = document.querySelector(".cards");
+const inputAddTitle = document.querySelector("#input-title");
+const inputAddLink = document.querySelector("#input-link");
+const popupFullImg = document.querySelector("#popup__img");
+const btnCloseImg = document.querySelector("#close-img");
 const initialCards = [
   {
     name: "Valle de Yosemite",
@@ -55,6 +59,7 @@ function handleEsc(evt) {
   if (evt.key === "Escape") {
     closeProfile();
     closeAdd();
+    closeImg();
   }
 }
 function closeProfile() {
@@ -63,7 +68,13 @@ function closeProfile() {
 }
 
 function closeAdd() {
+  inputAddLink.value = "";
+  inputAddTitle.value = "";
   popupAdd.classList.remove("popup__show");
+  document.removeEventListener("keydown", handleEsc);
+}
+function closeImg() {
+  popupFullImg.classList.remove("popup__show");
   document.removeEventListener("keydown", handleEsc);
 }
 
@@ -86,8 +97,35 @@ function createCard(name, link) {
   const card = templateElement.cloneNode(true).content.querySelector(".card");
   const cardImage = card.querySelector(".card__image");
   const cardname = card.querySelector(".card__text");
+  const likeBtn = card.querySelector(".card__btn-like");
+  const deleteBtn = card.querySelector(".card__btn-delete");
+  const popupImage = document.querySelector(".popup__img-full");
+  const popupName = document.querySelector(".popup__img-name");
+
   cardImage.src = link;
+  cardImage.alt = name;
   cardname.textContent = name;
+
+  //Like
+  likeBtn.addEventListener("click", () => {
+    likeBtn.classList.toggle("card__btn-like-active");
+  });
+
+  //Delete
+  deleteBtn.addEventListener("click", () => {
+    card.remove();
+  });
+
+  //PopUp
+  cardImage.addEventListener("click", () => {
+    popupImage.src = cardImage.src;
+    popupImage.alt = cardname.textContent;
+    popupName.textContent = cardname.textContent;
+    popupFullImg.classList.add("popup__show");
+    btnCloseImg.addEventListener("click", closeImg);
+    document.addEventListener("keydown", handleEsc);
+  });
+
   return card;
 }
 
@@ -95,3 +133,12 @@ initialCards.forEach(function (card) {
   const newCard = createCard(card.name, card.link);
   album.append(newCard);
 });
+
+function addNewCard(evt) {
+  const newCard = createCard(inputAddTitle.value, inputAddLink.value);
+  evt.preventDefault();
+  album.prepend(newCard);
+
+  closeAdd();
+}
+popupAdd.addEventListener("submit", addNewCard);

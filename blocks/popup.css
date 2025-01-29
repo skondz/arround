@@ -23,6 +23,14 @@
   position: relative;
   margin: auto;
 }
+.popup__container-img {
+  max-width: 75vw;
+  max-height: 75vh;
+  top: 0%;
+  opacity: 1;
+  position: relative;
+  margin: auto;
+}
 .popup__btn-close {
   background: url(../images/CloseIcon.svg);
   background-size: 100%;
@@ -93,6 +101,23 @@
 .popup__btn:hover {
   opacity: 80%;
 }
+
+.popup__img-full {
+  max-width: 75vw;
+  max-height: 75vh;
+}
+.popup__img-name {
+  max-width: 291px;
+  height: 12px;
+  font-family: "Inter";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 12px;
+  line-height: 15px;
+  color: #ffffff;
+  margin: 10px 0 0;
+}
+
 @media screen and (max-width: 580px) {
   .popup__container {
     width: 282px;
