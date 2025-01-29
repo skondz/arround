@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="Arround The U.S." />
+    <meta name="author" content="Fernando Escobar" />
+    <meta name="keywords" content="HTML, CSS, JavaScript, Sprint_5, skondz" />
+    <title>Arround The U.S.</title>
+    <link rel="stylesheet" href="./index.css" />
+    <link rel="shortcut icon" href="./Favicon 7.svg" />
+  </head>
+  <body class="page">
+    <header class="header">
+      <img
+        src="./images/Logo.png"
+        alt="Logo Arround the U.S."
+        class="header__logo"
+      />
+    </header>
+    <main>
+      <section class="profile">
+        <div class="profile__container">
+          <img
+            src="./images/Avatar.jpg"
+            alt="imagen de perfil"
+            class="profile__avatar"
+          />
+        </div>
+        <div class="profile__info">
+          <h1 class="profile__name">Jacques Cousteau</h1>
+          <img
+            src="./images/EditButton.svg"
+            alt="boton para editar"
+            class="profile__btn-edit"
+          />
+          <h2 class="profile__about">Explorer</h2>
+        </div>
+        <img
+          src="./images/addButton.svg"
+          alt="boton de agregar"
+          class="profile__btn-add"
+        />
+      </section>
+      <section class="cards">
+        <!-- carta 1 -->
+        <div class="card">
+          <img
+            src="./images/YosemiteValley.jpg"
+            alt="Yosemite Valley"
+            class="card__image"
+          />
+          <div class="card__info">
+            <p class="card__text">Yosemite Valley</p>
+            <button class="card__btn-like"></button>
+          </div>
+        </div>
+        <!-- carta 2 -->
+        <div class="card">
+          <img
+            src="./images/LakeLouise.png"
+            alt="Lago Louise"
+            class="card__image"
+          />
+          <div class="card__info">
+            <p class="card__text">Lago Louise</p>
+            <button class="card__btn-like"></button>
+          </div>
+        </div>
+        <!-- carta 3 -->
+        <div class="card">
+          <img
+            src="./images/BaldMountains.png"
+            alt="Bald Mountains"
+            class="card__image"
+          />
+          <div class="card__info">
+            <p class="card__text">Bald Mountains</p>
+            <button class="card__btn-like"></button>
+          </div>
+        </div>
+        <!-- carta 4 -->
+        <div class="card">
+          <img src="./images/Latermar.png" alt="Latermar" class="card__image" />
+          <div class="card__info">
+            <p class="card__text">Latermar</p>
+            <button class="card__btn-like"></button>
+          </div>
+        </div>
+        <!-- carta 5 -->
+        <div class="card">
+          <img
+            src="./images/VanoiseNational.png"
+            alt="Vanoise National"
+            class="card__image"
+          />
+          <div class="card__info">
+            <p class="card__text">Vanoise National</p>
+            <button class="card__btn-like"></button>
+          </div>
+        </div>
+        <!-- carta 6 -->
+        <div class="card">
+          <img
+            src="./images/LagodiBraies.png"
+            alt="Lago di Braies"
+            class="card__image"
+          />
+          <div class="card__info">
+            <p class="card__text">Lago di Braies</p>
+            <button class="card__btn-like"></button>
+          </div>
+        </div>
+      </section>
+    </main>
+    <footer class="footer">
+      <p class="footer__copyright">&copy;2024 Skondz</p>
+    </footer>
+    <!-- popup -->
+    <div class="popup" id="popup__profile">
+      <div class="popup__container">
+        <button class="popup__btn-close" id="close-profile"></button>
+        <form class="popup__content">
+          <label class="popup__title">Edit profile</label>
+          <fieldset class="popup__fieldset">
+            <input
+              type="text"
+              class="popup__input"
+              id="input-name"
+              name="nombre"
+              placeholder="Nombre"
+              required
+              minlength="2"
+              maxlength="40"
+            />
+            <input
+              type="text"
+              class="popup__input"
+              id="input-about"
+              name="nombre"
+              placeholder="Acerca de mi"
+              required
+              minlength="2"
+              maxlength="400"
+            />
+            <button class="popup__btn popup__btn-save" type="submit">
+              Guardar
+            </button>
+          </fieldset>
+        </form>
+      </div>
+    </div>
+    <!-- PopUp Add Image -->
+    <div class="popup" id="popup__add">
+      <div class="popup__container">
+        <button class="popup__btn-close" id="close-add"></button>
+        <form class="popup__content">
+          <label class="popup__title">Nuevo Lugar</label>
+          <fieldset class="popup__fieldset">
+            <input
+              type="text"
+              class="popup__input"
+              id="input-title"
+              name="title"
+              placeholder="Titulo"
+              required
+              minlength="2"
+              maxlength="40"
+            />
+            <input
+              type="text"
+              class="popup__input"
+              id="input-link"
+              name="link"
+              placeholder="Enlace a la imagen"
+              required
+              minlength="2"
+              maxlength="400"
+            />
+            <button class="popup__btn popup__btn-create" type="submit">
+              Crear
+            </button>
+          </fieldset>
+        </form>
+      </div>
+    </div>
+    <script src="./sript.js"></script>
+  </body>
+</html>
