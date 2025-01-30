@@ -52,7 +52,7 @@
     <div class="popup" id="popup__profile">
       <div class="popup__container">
         <button class="popup__btn-close" id="close-profile"></button>
-        <form class="popup__content">
+        <form class="popup__content" id="form-profile" novalidate>
           <label class="popup__title">Edit profile</label>
           <fieldset class="popup__fieldset">
             <input
@@ -61,10 +61,11 @@
               id="input-name"
               name="nombre"
               placeholder="Nombre"
-              required
               minlength="2"
               maxlength="40"
+              required
             />
+            <span class="input-name-error input-error"></span>
             <input
               type="text"
               class="popup__input"
@@ -75,7 +76,11 @@
               minlength="2"
               maxlength="400"
             />
-            <button class="popup__btn popup__btn-save" type="submit">
+
+            <button
+              class="popup__btn popup__btn-save popup__btn_disabled"
+              type="submit"
+            >
               Guardar
             </button>
           </fieldset>
@@ -87,7 +92,7 @@
     <div class="popup" id="popup__add">
       <div class="popup__container">
         <button class="popup__btn-close" id="close-add"></button>
-        <form class="popup__content">
+        <form class="popup__content" id="form-add" novalidate>
           <label class="popup__title">Nuevo Lugar</label>
           <fieldset class="popup__fieldset">
             <input
@@ -101,16 +106,19 @@
               maxlength="40"
             />
             <input
-              type="text"
+              type="url"
               class="popup__input"
               id="input-link"
               name="link"
               placeholder="Enlace a la imagen"
               required
               minlength="2"
-              maxlength="400"
+              maxlength="200"
             />
-            <button class="popup__btn popup__btn-create" type="submit">
+            <button
+              class="popup__btn popup__btn-create popup__btn_disabled"
+              type="submit"
+            >
               Crear
             </button>
           </fieldset>
@@ -139,6 +147,6 @@
     </template>
 
     <!-- sripts -->
-    <script src="./sript.js"></script>
+    <script src="./script/index.js"></script>
   </body>
 </html>

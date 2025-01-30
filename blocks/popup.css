@@ -69,7 +69,7 @@
   margin-top: 35px;
 }
 .popup__fieldset {
-  margin: 53px auto 0 auto;
+  margin: 23px auto 0 auto;
   width: 358px;
   height: 182px;
   border: none;
@@ -80,7 +80,10 @@
   border-bottom: 1px solid #000000;
   width: 358px;
   max-height: 28px;
-  margin: auto auto 30px;
+  margin: 30px auto auto 0;
+}
+.popup__input_type_error {
+  border-bottom: 1px solid #ff0000;
 }
 
 .popup__btn {
@@ -97,6 +100,14 @@
   border-radius: 2%;
   color: #ffffff;
   cursor: pointer;
+}
+
+.popup__btn_disabled {
+  background-color: #b6bcbf;
+  color: #fff;
+  border: none;
+  cursor: not-allowed;
+  pointer-events: none;
 }
 .popup__btn:hover {
   opacity: 80%;
@@ -116,6 +127,25 @@
   line-height: 15px;
   color: #ffffff;
   margin: 10px 0 0;
+}
+
+.input-error {
+  margin: 6px auto;
+  font-family: "Inter";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 12px;
+  line-height: 15px;
+  color: #ff0000;
+  display: none;
+  height: 16px;
+  width: 220px;
+}
+
+/* Por favor, rellena este campo. */
+
+.input-error-active {
+  display: flex;
 }
 
 @media screen and (max-width: 580px) {
