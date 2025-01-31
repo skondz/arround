@@ -53,11 +53,11 @@
       <div class="popup__container">
         <button class="popup__btn-close" id="close-profile"></button>
         <form class="popup__content" id="form-profile" novalidate>
-          <label class="popup__title">Edit profile</label>
+          <p class="popup__title">Edit profile</p>
           <fieldset class="popup__fieldset">
             <input
               type="text"
-              class="popup__input"
+              class="popup__input popup__input-first"
               id="input-name"
               name="nombre"
               placeholder="Nombre"
@@ -76,6 +76,7 @@
               minlength="2"
               maxlength="400"
             />
+            <span class="input-about-error input-error"></span>
 
             <button
               class="popup__btn popup__btn-save popup__btn_disabled"
@@ -93,11 +94,11 @@
       <div class="popup__container">
         <button class="popup__btn-close" id="close-add"></button>
         <form class="popup__content" id="form-add" novalidate>
-          <label class="popup__title">Nuevo Lugar</label>
+          <p class="popup__title">Nuevo Lugar</p>
           <fieldset class="popup__fieldset">
             <input
               type="text"
-              class="popup__input"
+              class="popup__input popup__input-first"
               id="input-title"
               name="title"
               placeholder="Titulo"
@@ -105,6 +106,8 @@
               minlength="2"
               maxlength="40"
             />
+            <span class="input-title-error input-error"></span>
+
             <input
               type="url"
               class="popup__input"
@@ -115,6 +118,8 @@
               minlength="2"
               maxlength="200"
             />
+            <span class="input-link-error input-error"></span>
+
             <button
               class="popup__btn popup__btn-create popup__btn_disabled"
               type="submit"

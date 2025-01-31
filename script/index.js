@@ -145,25 +145,55 @@ function addNewCard(evt) {
 popupAdd.addEventListener("submit", addNewCard);
 
 //validador
-const formError = formProfile.querySelector(`.${inputProfileName.id}-error`);
-
-const showInputError = (element, errorMessage) => {
-  element.classList.add("popup__input_type_error");
-  formError.textContent = errorMessage;
-  formError.classList.add("input-error-active");
+const showInputError = (formElement, inputElement, errorMessage, settings) => {
+  const errorElement = formElement.querySelector(`.${inputElement.id}-error`);
+  inputElement.classList.add("popup__input_type_error");
+  errorElement.textContent = errorMessage;
+  errorElement.classList.add("input-error-active");
 };
-const hideInputError = (element) => {
-  element.classList.remove("popup__input_type_error");
-  formError.classList.remove("input-error-active");
-  formError.textContent = "";
+const hideInputError = (formElement, inputElement) => {
+  const errorElement = formElement.querySelector(`.${inputElement.id}-error`);
+  inputElement.classList.remove("popup__input_type_error");
+  errorElement.classList.remove("input-error-active");
+  errorElement.textContent = "";
+  console.log(errorElement);
 };
-const isValid = () => {
-  if (!inputProfileName.validity.valid) {
-    showInputError(inputProfileName, inputProfileName.validationMessage);
+const isValid = (formElement, inputElement) => {
+  if (!inputElement.validity.valid) {
+    showInputError(formElement, inputElement, inputElement.validationMessage);
   } else {
-    hideInputError(inputProfileName);
+    hideInputError(formElement, inputElement);
   }
 };
-inputProfileName.addEventListener("input", isValid);
 
-console.log(`.${inputProfileName.id}-error`);
+const hasInvalidInput = (inputList) => {
+  return inputList.some((inputElement) => {
+    return !inputElement.validity.valid;
+  });
+};
+
+// Encuentra todos los campos dentro del formulario y
+// crea un array a partir de estos, utilizando el método Array.from()
+
+const setEventListeners = (formElement) => {
+  const inputList = Array.from(formElement.querySelectorAll(".popup__input"));
+  inputList.forEach((inputElement) => {
+    inputElement.addEventListener("input", () => {
+      isValid(formElement, inputElement);
+    });
+  });
+};
+
+// Encontrará todos los formularios con la clase especificada en el DOM y
+// creará un array, a partir de estos, utilizando el método Array.from()
+const enableValidation = () => {
+  const formList = Array.from(document.querySelectorAll(".popup__content"));
+  formList.forEach((formElement) => {
+    formElement.addEventListener("submit", (evt) => {
+      evt.preventDefault();
+    });
+    setEventListeners(formElement);
+  });
+};
+
+enableValidation();
