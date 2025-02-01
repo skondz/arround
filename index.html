@@ -50,6 +50,7 @@
 
     <!-- popup -->
     <div class="popup" id="popup__profile">
+      <div class="popup__overlay"></div>
       <div class="popup__container">
         <button class="popup__btn-close" id="close-profile"></button>
         <form class="popup__content" id="form-profile" novalidate>
@@ -78,10 +79,7 @@
             />
             <span class="input-about-error input-error"></span>
 
-            <button
-              class="popup__btn popup__btn-save popup__btn_disabled"
-              type="submit"
-            >
+            <button class="popup__submit popup__btn-save" type="submit">
               Guardar
             </button>
           </fieldset>
@@ -91,6 +89,7 @@
 
     <!-- PopUp Add Image -->
     <div class="popup" id="popup__add">
+      <div class="popup__overlay"></div>
       <div class="popup__container">
         <button class="popup__btn-close" id="close-add"></button>
         <form class="popup__content" id="form-add" novalidate>
@@ -120,10 +119,7 @@
             />
             <span class="input-link-error input-error"></span>
 
-            <button
-              class="popup__btn popup__btn-create popup__btn_disabled"
-              type="submit"
-            >
+            <button class="popup__submit popup__btn-create" type="submit">
               Crear
             </button>
           </fieldset>
@@ -132,6 +128,7 @@
     </div>
     <!-- PopUp Image -->
     <div class="popup" id="popup__img">
+      <div class="popup__overlay"></div>
       <div class="popup__container-img">
         <button class="popup__btn-close" id="close-img"></button>
         <img src="" alt="" class="popup__img-full" />
@@ -153,5 +150,6 @@
 
     <!-- sripts -->
     <script src="./script/index.js"></script>
+    <script src="./script/validate.js"></script>
   </body>
 </html>

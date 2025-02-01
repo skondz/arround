@@ -15,6 +15,7 @@ const inputAddLink = document.querySelector("#input-link");
 const popupFullImg = document.querySelector("#popup__img");
 const btnCloseImg = document.querySelector("#close-img");
 const formProfile = document.querySelector("#form-profile");
+const popupOverlays = document.querySelectorAll(".popup__overlay");
 const initialCards = [
   {
     name: "Valle de Yosemite",
@@ -87,7 +88,7 @@ function handleSaveChanges(evt) {
   evt.preventDefault();
   profileName.textContent = inputProfileName.value;
   profileAbout.textContent = inputProfileAbout.value;
-  closePopup();
+  closeProfile();
 }
 
 popupProfile.addEventListener("submit", handleSaveChanges);
@@ -144,56 +145,10 @@ function addNewCard(evt) {
 }
 popupAdd.addEventListener("submit", addNewCard);
 
-//validador
-const showInputError = (formElement, inputElement, errorMessage, settings) => {
-  const errorElement = formElement.querySelector(`.${inputElement.id}-error`);
-  inputElement.classList.add("popup__input_type_error");
-  errorElement.textContent = errorMessage;
-  errorElement.classList.add("input-error-active");
-};
-const hideInputError = (formElement, inputElement) => {
-  const errorElement = formElement.querySelector(`.${inputElement.id}-error`);
-  inputElement.classList.remove("popup__input_type_error");
-  errorElement.classList.remove("input-error-active");
-  errorElement.textContent = "";
-  console.log(errorElement);
-};
-const isValid = (formElement, inputElement) => {
-  if (!inputElement.validity.valid) {
-    showInputError(formElement, inputElement, inputElement.validationMessage);
-  } else {
-    hideInputError(formElement, inputElement);
-  }
-};
-
-const hasInvalidInput = (inputList) => {
-  return inputList.some((inputElement) => {
-    return !inputElement.validity.valid;
+popupOverlays.forEach((overlay) => {
+  overlay.addEventListener("click", () => {
+    popupAdd.classList.remove("popup__show");
+    popupProfile.classList.remove("popup__show");
+    popupFullImg.classList.remove("popup__show");
   });
-};
-
-// Encuentra todos los campos dentro del formulario y
-// crea un array a partir de estos, utilizando el método Array.from()
-
-const setEventListeners = (formElement) => {
-  const inputList = Array.from(formElement.querySelectorAll(".popup__input"));
-  inputList.forEach((inputElement) => {
-    inputElement.addEventListener("input", () => {
-      isValid(formElement, inputElement);
-    });
-  });
-};
-
-// Encontrará todos los formularios con la clase especificada en el DOM y
-// creará un array, a partir de estos, utilizando el método Array.from()
-const enableValidation = () => {
-  const formList = Array.from(document.querySelectorAll(".popup__content"));
-  formList.forEach((formElement) => {
-    formElement.addEventListener("submit", (evt) => {
-      evt.preventDefault();
-    });
-    setEventListeners(formElement);
-  });
-};
-
-enableValidation();
+});
