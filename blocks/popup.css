@@ -59,7 +59,7 @@
 .popup__btn-close:hover {
   opacity: 60%;
 }
-.popup__content {
+.popup__form {
   max-width: 430px;
   height: 330px;
   top: 0%;
@@ -100,7 +100,7 @@
   border-bottom: 1px solid #ff0000;
 }
 
-.popup__submit {
+.popup__button {
   width: 358px;
   height: 50px;
   margin: 48px auto 0px;
@@ -116,7 +116,7 @@
   cursor: pointer;
 }
 
-.popup__submit_disabled {
+.popup__button_disabled {
   background-color: #b6bcbf;
   color: #fff;
   border: none;
@@ -159,7 +159,7 @@
 
 /* Por favor, rellena este campo. */
 
-.input-error-active {
+.popup__error_visible {
   display: flex;
 }
 
@@ -194,11 +194,11 @@
     max-height: 28px;
     margin-top: 0;
   }
-  .popup__submit {
+  .popup__button {
     margin: 46px 0;
     width: 238px;
   }
-  .popup__submit_disabled {
+  .popup__button_disabled {
     margin-top: 18px;
   }
   .input-error {
