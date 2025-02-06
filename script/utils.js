@@ -16,21 +16,8 @@ function handleEsc(evt) {
     popupProfile.classList.remove("popup__show");
   }
 }
-function openProfile() {
-  popupProfile.classList.add("popup__show");
-  inputProfileName.value = profileName.textContent;
-  inputProfileAbout.value = profileAbout.textContent;
-  document.addEventListener("keydown", handleEsc);
-}
-function openAdd() {
-  popupAdd.classList.add("popup__show");
-  document.addEventListener("keydown", handleEsc);
-}
+
 //close
-function closeProfile() {
-  popupProfile.classList.remove("popup__show");
-  document.removeEventListener("keydown", handleEsc);
-}
 function closeAdd() {
   inputAddLink.value = "";
   inputAddTitle.value = "";
@@ -42,7 +29,6 @@ function saveChanges(evt) {
   evt.preventDefault();
   profileName.textContent = inputProfileName.value;
   profileAbout.textContent = inputProfileAbout.value;
-  closeProfile();
 }
 const validationSettings = {
   formSelector: ".popup__form",
@@ -53,12 +39,4 @@ const validationSettings = {
   errorClass: "popup__error_visible",
 };
 
-export {
-  handleEsc,
-  openProfile,
-  openAdd,
-  closeProfile,
-  closeAdd,
-  saveChanges,
-  validationSettings,
-};
+export { handleEsc, closeAdd, saveChanges, validationSettings };
