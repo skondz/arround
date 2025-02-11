@@ -1,8 +1,8 @@
 import { handleEsc } from "./utils.js";
 export class Card {
-  constructor(name, link) {
-    this._name = name;
-    this._link = link;
+  constructor(data) {
+    this._name = data.name;
+    this._link = data.link;
     this._card = this._getTemplate();
   }
   _getTemplate() {
@@ -52,5 +52,11 @@ export class Card {
     this._setProperties();
     this._setListeners();
     return this._card;
+  }
+  _getName() {
+    this._name;
+  }
+  _getLink() {
+    this._link;
   }
 }

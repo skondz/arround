@@ -1,15 +1,16 @@
-import { Card } from "./Card.js";
 import { FormValidator } from "./FormValidator.js";
-import { Popup } from "./Popup.js";
-import { Section } from "./Section.js";
-import { validationSettings, closeAdd, saveChanges } from "./utils.js";
+import { validationSettings, saveChanges, renderCard } from "./utils.js";
+import { PopupWithForm } from "./PopupWithForm.js";
 const popupProfile = document.querySelector("#popup__profile");
 const btnOpenProfile = document.querySelector(".profile__btn-edit");
 const btnOpenAdd = document.querySelector(".profile__btn-add");
 const popupAdd = document.querySelector("#popup__add");
 const album = document.querySelector(".cards");
-const inputAddTitle = document.querySelector("#input-title");
-const inputAddLink = document.querySelector("#input-link");
+const inputProfileName = document.querySelector("#input-name");
+const inputProfileAbout = document.querySelector("#input-about");
+const profileName = document.querySelector(".profile__name");
+const profileAbout = document.querySelector(".profile__about");
+
 const initialCards = [
   {
     name: "Valle de Yosemite",
@@ -36,42 +37,27 @@ const initialCards = [
     link: "https://practicum-content.s3.us-west-1.amazonaws.com/new-markets/WEB_sprint_5/ES/lago.jpg",
   },
 ];
+
 //Open profile Popup
-const openProfilePopup = new Popup("#popup__profile");
-btnOpenProfile.addEventListener("click", () => {
-  openProfilePopup.open();
-});
-//Open Add Popup
-const openAddPopup = new Popup("#popup__add");
-btnOpenAdd.addEventListener("click", () => {
-  openAddPopup.open();
-});
-
-popupProfile.addEventListener("submit", saveChanges);
-
-// Initial Cards
-const defaultCards = new Section(
-  {
-    data: initialCards,
-    renderer: (item) => {
-      const { name, link } = item;
-      const card = new Card(name, link);
-      const cardElement = card.generateCard();
-      defaultCards.addItem(cardElement);
-    },
-  },
-  ".cards"
+const openPopupProfile = new PopupWithForm("#popup__profile", (values) =>
+  saveChanges(values)
 );
-defaultCards.renderItems();
-
-//new Cards
-function addNewCard(evt) {
-  const newCard = new Card(inputAddTitle.value, inputAddLink.value);
-  evt.preventDefault();
-  album.prepend(newCard.generateCard());
-  closeAdd();
-}
-popupAdd.addEventListener("submit", addNewCard);
+btnOpenProfile.addEventListener("click", () => {
+  openPopupProfile.open();
+  inputProfileName.value = profileName.textContent;
+  inputProfileAbout.value = profileAbout.textContent;
+});
+openPopupProfile.setEventListeners();
+//Open Add Popup
+const openPopupAdd = new PopupWithForm("#popup__add", (values) =>
+  renderCard(values, album)
+);
+btnOpenAdd.addEventListener("click", () => {
+  openPopupAdd.open();
+});
+openPopupAdd.setEventListeners();
+// Initial Cards
+initialCards.forEach((card) => renderCard(card, album));
 
 //Validate
 const validateProfile = new FormValidator(popupProfile, validationSettings);

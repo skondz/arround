@@ -1,13 +1,10 @@
 export class Popup {
   constructor(popupSelector) {
     this.popupSelector = document.querySelector(popupSelector);
-    this.btnClose = this.popupSelector.querySelector(".popup__btn-close");
-    this.overlay = this.popupSelector.querySelector(".popup__overlay");
   }
   open() {
     this.popupSelector.classList.add("popup__show");
     document.addEventListener("keyup", this._handleEscClose.bind(this));
-    this.setEventListeners();
   }
   close() {
     this.popupSelector.classList.remove("popup__show");
@@ -19,10 +16,12 @@ export class Popup {
     }
   }
   setEventListeners() {
-    this.btnClose.addEventListener("click", () => {
+    const btnClose = this.popupSelector.querySelector(".popup__btn-close");
+    const overlay = this.popupSelector.querySelector(".popup__overlay");
+    btnClose.addEventListener("click", () => {
       this.close();
     });
-    this.overlay.addEventListener("click", () => {
+    overlay.addEventListener("click", () => {
       this.close();
     });
   }

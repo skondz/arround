@@ -1,3 +1,5 @@
+import { Card } from "./Card.js";
+
 const popupFullImg = document.querySelector("#popup__img");
 const popupProfile = document.querySelector("#popup__profile");
 const inputProfileName = document.querySelector("#input-name");
@@ -26,7 +28,6 @@ function closeAdd() {
 }
 //Save
 function saveChanges(evt) {
-  evt.preventDefault();
   profileName.textContent = inputProfileName.value;
   profileAbout.textContent = inputProfileAbout.value;
 }
@@ -39,4 +40,24 @@ const validationSettings = {
   errorClass: "popup__error_visible",
 };
 
-export { handleEsc, closeAdd, saveChanges, validationSettings };
+const createCard = (data) => {
+  return new Card(data).generateCard();
+};
+const renderCard = (data, wrap) => {
+  wrap.prepend(createCard(data));
+};
+
+const handleImageClick = (card) => {
+  cardImage.src = card.getLink();
+  cardImage.alt = card.getName();
+  cardName.textContent = card.getName();
+};
+
+export {
+  handleEsc,
+  closeAdd,
+  saveChanges,
+  validationSettings,
+  renderCard,
+  handleImageClick,
+};
