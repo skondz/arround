@@ -1,5 +1,10 @@
 import { FormValidator } from "./FormValidator.js";
-import { validationSettings, saveChanges, renderCard } from "./utils.js";
+import {
+  validationSettings,
+  saveChanges,
+  renderCard,
+  popupWithImg,
+} from "./utils.js";
 import { PopupWithForm } from "./PopupWithForm.js";
 const popupProfile = document.querySelector("#popup__profile");
 const btnOpenProfile = document.querySelector(".profile__btn-edit");

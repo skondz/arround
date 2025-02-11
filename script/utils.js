@@ -1,5 +1,5 @@
 import { Card } from "./Card.js";
-
+import { PopupWithImage } from "./PopupWithImage.js";
 const popupFullImg = document.querySelector("#popup__img");
 const popupProfile = document.querySelector("#popup__profile");
 const inputProfileName = document.querySelector("#input-name");
@@ -41,7 +41,9 @@ const validationSettings = {
 };
 
 const createCard = (data) => {
-  return new Card(data).generateCard();
+  return new Card(data, () => {
+    popupWithImg.open(data.name, data.link);
+  }).generateCard();
 };
 const renderCard = (data, wrap) => {
   wrap.prepend(createCard(data));
@@ -53,6 +55,9 @@ const handleImageClick = (card) => {
   cardName.textContent = card.getName();
 };
 
+const popupWithImg = new PopupWithImage("#popup__img");
+popupWithImg.setEventListeners();
+
 export {
   handleEsc,
   closeAdd,
@@ -60,4 +65,5 @@ export {
   validationSettings,
   renderCard,
   handleImageClick,
+  popupWithImg,
 };
