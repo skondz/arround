@@ -1,5 +1,6 @@
 import { Card } from "./Card.js";
 import { PopupWithImage } from "./PopupWithImage.js";
+import { UserInfo } from "./UserInfo.js";
 const popupFullImg = document.querySelector("#popup__img");
 const popupProfile = document.querySelector("#popup__profile");
 const inputProfileName = document.querySelector("#input-name");
@@ -7,10 +8,8 @@ const inputProfileAbout = document.querySelector("#input-about");
 const profileName = document.querySelector(".profile__name");
 const profileAbout = document.querySelector(".profile__about");
 const popupAdd = document.querySelector("#popup__add");
-const inputAddTitle = document.querySelector("#input-title");
-const inputAddLink = document.querySelector("#input-link");
 
-//abrir
+//handle Esc
 function handleEsc(evt) {
   if (evt.key === "Escape") {
     popupFullImg.classList.remove("popup__show");
@@ -19,17 +18,20 @@ function handleEsc(evt) {
   }
 }
 
-//close
-function closeAdd() {
-  inputAddLink.value = "";
-  inputAddTitle.value = "";
-  popupAdd.classList.remove("popup__show");
-  document.removeEventListener("keydown", handleEsc);
-}
 //Save
-function saveChanges(evt) {
-  profileName.textContent = inputProfileName.value;
-  profileAbout.textContent = inputProfileAbout.value;
+
+const userInfo = new UserInfo(
+  { nameSelector: profileName, aboutSelector: profileAbout },
+  popupProfile
+);
+function getUserInfo() {
+  const { name, about } = userInfo.getUserInfo();
+  inputProfileName.value = name;
+  inputProfileAbout.value = about;
+}
+
+function saveChanges() {
+  userInfo.setUserInfo();
 }
 const validationSettings = {
   formSelector: ".popup__form",
@@ -42,17 +44,11 @@ const validationSettings = {
 
 const createCard = (data) => {
   return new Card(data, () => {
-    popupWithImg.open(data.name, data.link);
+    popupWithImg.open(data.title, data.link);
   }).generateCard();
 };
 const renderCard = (data, wrap) => {
   wrap.prepend(createCard(data));
-};
-
-const handleImageClick = (card) => {
-  cardImage.src = card.getLink();
-  cardImage.alt = card.getName();
-  cardName.textContent = card.getName();
 };
 
 const popupWithImg = new PopupWithImage("#popup__img");
@@ -60,10 +56,9 @@ popupWithImg.setEventListeners();
 
 export {
   handleEsc,
-  closeAdd,
   saveChanges,
   validationSettings,
   renderCard,
-  handleImageClick,
   popupWithImg,
+  getUserInfo,
 };
