@@ -1,11 +1,10 @@
 import { FormValidator } from "./FormValidator.js";
-
+import { profileName, profileAbout } from "./const.js";
 import {
-  saveChanges,
   renderCard,
   popupWithImg,
   getUserInfo,
-  setUserInfo,
+  openPopupProfile,
 } from "./utils.js";
 
 import { PopupWithForm } from "./PopupWithForm.js";
@@ -18,18 +17,40 @@ import {
   btnOpenAdd,
   popupAdd,
   album,
-  initialCards,
   validationSettings,
 } from "./const.js";
 import { Card } from "./Card.js";
+import { api } from "./Api.js";
 
-setUserInfo();
+//Iniciar page//
+
+//cargar perfil
+api.getUserInfo().then((data) => {
+  profileName.textContent = data.name;
+  profileAbout.textContent = data.about;
+
+  //cargar cartas
+
+  api.getInitialCards().then((cards) => {
+    const section = new Section(
+      {
+        items: cards,
+        renderer: (item) => {
+          const card = new Card(item, () => {
+            popupWithImg.open(item.name, item.link);
+          });
+          const newCard = card.generateCard();
+          section.addItem(newCard);
+        },
+      },
+      ".cards"
+    );
+    section.renderItems();
+  });
+});
 //Open profile Popup//
 
 //instanciar class
-const openPopupProfile = new PopupWithForm("#popup__profile", (values) =>
-  saveChanges(values)
-);
 
 //add event open
 btnOpenProfile.addEventListener("click", () => {
@@ -58,20 +79,6 @@ openPopupAdd.setEventListeners();
 
 // Initial Cards
 
-const section = new Section(
-  {
-    items: initialCards,
-    renderer: (item) => {
-      const card = new Card(item, () => {
-        popupWithImg.open(item.name, item.link);
-      });
-      const newCard = card.generateCard();
-      section.addItem(newCard);
-    },
-  },
-  ".cards"
-);
-section.renderItems();
 //Validate
 const validateProfile = new FormValidator(popupProfile, validationSettings);
 const validateAdd = new FormValidator(popupAdd, validationSettings);

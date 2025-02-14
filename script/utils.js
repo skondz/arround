@@ -1,28 +1,18 @@
 import { Card } from "./Card.js";
 import { PopupWithImage } from "./PopupWithImage.js";
-import { UserInfo } from "./UserInfo.js";
+import { PopupWithForm } from "./PopupWithForm.js";
 import {
-  popupProfile,
   inputProfileName,
   inputProfileAbout,
   profileName,
   profileAbout,
+  btnSaveProfile,
 } from "./const.js";
 import { api } from "./Api.js";
 //Save profile//
 
 //instanciar class
-const userInfo = new UserInfo(
-  { nameSelector: profileName, aboutSelector: profileAbout },
-  popupProfile
-);
-//obtener info
-function setUserInfo() {
-  api.getUserInfo().then((data) => {
-    profileName.textContent = data.name;
-    profileAbout.textContent = data.about;
-  });
-}
+
 function getUserInfo() {
   api.getUserInfo().then((data) => {
     inputProfileName.value = data.name;
@@ -31,9 +21,27 @@ function getUserInfo() {
 }
 
 //Guardar Info
-function saveChanges() {
-  userInfo.setUserInfo();
+
+function saveChangesApi(evt) {
+  const newName = inputProfileName.value;
+  const newAbout = inputProfileAbout.value;
+  btnSaveProfile.textContent = "Guardando...";
+
+  api
+    .modifyUserInfo(newName, newAbout)
+    .then((data) => {
+      profileName.textContent = data.name;
+      profileAbout.textContent = data.about;
+    })
+    .catch((err) => {
+      console.log("Error", err);
+    })
+    .finally(() => {
+      btnSaveProfile.textContent = "Guardar";
+      openPopupProfile.close();
+    });
 }
+const openPopupProfile = new PopupWithForm("#popup__profile", saveChangesApi);
 
 //Crear Cartas//
 
@@ -53,4 +61,10 @@ const renderCard = (data, wrap) => {
 const popupWithImg = new PopupWithImage("#popup__img");
 popupWithImg.setEventListeners();
 
-export { saveChanges, renderCard, popupWithImg, getUserInfo, setUserInfo };
+export {
+  renderCard,
+  popupWithImg,
+  getUserInfo,
+  saveChangesApi,
+  openPopupProfile,
+};
