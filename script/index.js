@@ -1,67 +1,77 @@
 import { FormValidator } from "./FormValidator.js";
+
 import {
-  validationSettings,
   saveChanges,
   renderCard,
+  popupWithImg,
   getUserInfo,
+  setUserInfo,
 } from "./utils.js";
+
 import { PopupWithForm } from "./PopupWithForm.js";
+
 import { Section } from "./Section.js";
 
-const popupProfile = document.querySelector("#popup__profile");
-const btnOpenProfile = document.querySelector(".profile__btn-edit");
-const btnOpenAdd = document.querySelector(".profile__btn-add");
-const popupAdd = document.querySelector("#popup__add");
-const album = document.querySelector(".cards");
+import {
+  popupProfile,
+  btnOpenProfile,
+  btnOpenAdd,
+  popupAdd,
+  album,
+  initialCards,
+  validationSettings,
+} from "./const.js";
+import { Card } from "./Card.js";
 
-const initialCards = [
-  {
-    title: "Valle de Yosemite",
-    link: "https://practicum-content.s3.us-west-1.amazonaws.com/new-markets/WEB_sprint_5/ES/yosemite.jpg",
-  },
-  {
-    title: "Lago Louise",
-    link: "https://practicum-content.s3.us-west-1.amazonaws.com/new-markets/WEB_sprint_5/ES/lake-louise.jpg",
-  },
-  {
-    title: "Montañas Calvas",
-    link: "https://practicum-content.s3.us-west-1.amazonaws.com/new-markets/WEB_sprint_5/ES/bald-mountains.jpg",
-  },
-  {
-    title: "Latemar",
-    link: "https://practicum-content.s3.us-west-1.amazonaws.com/new-markets/WEB_sprint_5/ES/latemar.jpg",
-  },
-  {
-    title: "Parque Nacional de la Vanoise",
-    link: "https://practicum-content.s3.us-west-1.amazonaws.com/new-markets/WEB_sprint_5/ES/vanoise.jpg",
-  },
-  {
-    title: "Lago di Braies",
-    link: "https://practicum-content.s3.us-west-1.amazonaws.com/new-markets/WEB_sprint_5/ES/lago.jpg",
-  },
-];
+setUserInfo();
+//Open profile Popup//
 
-//Open profile Popup
+//instanciar class
 const openPopupProfile = new PopupWithForm("#popup__profile", (values) =>
   saveChanges(values)
 );
+
+//add event open
 btnOpenProfile.addEventListener("click", () => {
   openPopupProfile.open();
   getUserInfo();
 });
+
+//propiedades
 openPopupProfile.setEventListeners();
-//Open Add Popup
+
+//Open Add Popup//
+
+//instanciar class
 const openPopupAdd = new PopupWithForm("#popup__add", (values) =>
   renderCard(values, album)
 );
+
+//add event open
 btnOpenAdd.addEventListener("click", () => {
   openPopupAdd.open();
 });
+
+//propiedades
+
 openPopupAdd.setEventListeners();
+
 // Initial Cards
 
-initialCards.forEach((card) => renderCard(card, album));
-
+const section = new Section(
+  {
+    items: initialCards,
+    renderer: (item) => {
+      const card = new Card(item, () => {
+        popupWithImg.open(item.name, item.link);
+      });
+      const newCard = card.generateCard();
+      section.addItem(newCard);
+    },
+  },
+  ".cards"
+);
+section.renderItems();
 //Validate
 const validateProfile = new FormValidator(popupProfile, validationSettings);
 const validateAdd = new FormValidator(popupAdd, validationSettings);

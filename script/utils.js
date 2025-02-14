@@ -1,64 +1,56 @@
 import { Card } from "./Card.js";
 import { PopupWithImage } from "./PopupWithImage.js";
 import { UserInfo } from "./UserInfo.js";
-const popupFullImg = document.querySelector("#popup__img");
-const popupProfile = document.querySelector("#popup__profile");
-const inputProfileName = document.querySelector("#input-name");
-const inputProfileAbout = document.querySelector("#input-about");
-const profileName = document.querySelector(".profile__name");
-const profileAbout = document.querySelector(".profile__about");
-const popupAdd = document.querySelector("#popup__add");
+import {
+  popupProfile,
+  inputProfileName,
+  inputProfileAbout,
+  profileName,
+  profileAbout,
+} from "./const.js";
+import { api } from "./Api.js";
+//Save profile//
 
-//handle Esc
-function handleEsc(evt) {
-  if (evt.key === "Escape") {
-    popupFullImg.classList.remove("popup__show");
-    popupAdd.classList.remove("popup__show");
-    popupProfile.classList.remove("popup__show");
-  }
-}
-
-//Save
-
+//instanciar class
 const userInfo = new UserInfo(
   { nameSelector: profileName, aboutSelector: profileAbout },
   popupProfile
 );
+//obtener info
+function setUserInfo() {
+  api.getUserInfo().then((data) => {
+    profileName.textContent = data.name;
+    profileAbout.textContent = data.about;
+  });
+}
 function getUserInfo() {
-  const { name, about } = userInfo.getUserInfo();
-  inputProfileName.value = name;
-  inputProfileAbout.value = about;
+  api.getUserInfo().then((data) => {
+    inputProfileName.value = data.name;
+    inputProfileAbout.value = data.about;
+  });
 }
 
+//Guardar Info
 function saveChanges() {
   userInfo.setUserInfo();
 }
-const validationSettings = {
-  formSelector: ".popup__form",
-  inputSelector: ".popup__input",
-  submitButtonSelector: ".popup__button",
-  inactiveButtonClass: "popup__button_disabled",
-  inputErrorClass: "popup__input_type_error",
-  errorClass: "popup__error_visible",
-};
 
+//Crear Cartas//
+
+//Instanciar class
 const createCard = (data) => {
   return new Card(data, () => {
-    popupWithImg.open(data.title, data.link);
+    popupWithImg.open(data.name, data.link);
   }).generateCard();
 };
+
+//renderizar
 const renderCard = (data, wrap) => {
   wrap.prepend(createCard(data));
 };
 
+//instanciar popup image
 const popupWithImg = new PopupWithImage("#popup__img");
 popupWithImg.setEventListeners();
 
-export {
-  handleEsc,
-  saveChanges,
-  validationSettings,
-  renderCard,
-  popupWithImg,
-  getUserInfo,
-};
+export { saveChanges, renderCard, popupWithImg, getUserInfo, setUserInfo };
