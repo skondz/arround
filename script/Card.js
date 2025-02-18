@@ -1,7 +1,11 @@
 export class Card {
-  constructor(data, handleCardClick) {
+  constructor(data, { _id, owner, likes }, currentUser, handleCardClick) {
     this._name = data.name;
     this._link = data.link;
+    this._currentUser = currentUser;
+    this._owner = owner;
+    this._likes = likes;
+    this._id = _id;
     this._card = this._getTemplate();
     this.handleCardClick = handleCardClick;
   }
@@ -19,6 +23,9 @@ export class Card {
     this._cardImage.src = this._link;
     this._cardImage.name = this._name;
     this._cardname.textContent = this._name;
+    if (this._currentUser === this._owner) {
+      this._deleteBtn.style.diplay = "none";
+    }
   }
   _handleLike() {
     this._likeBtn.classList.toggle("card__btn-like-active");

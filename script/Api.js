@@ -34,6 +34,32 @@ class Api {
       })
       .catch((error) => console.log("Error", error));
   }
+  getNewCard(name, link) {
+    return fetch(`${this._baseUrl}/cards`, {
+      method: "POST",
+      headers: { ...this._headers, "Content-Type": "application/json" },
+      body: JSON.stringify({ name, link }),
+    })
+      .then((res) => {
+        if (res.ok) {
+          return res.json();
+        }
+      })
+      .catch((error) => console.log("Error", error));
+  }
+  likeCard(cardId, isLiked) {
+    const method = isLiked ? "PUT" : "DELETE";
+    return fetch(`${this._baseUrl}/cards/likes/${cardId}`, {
+      method: method,
+      headers: this._headers,
+    })
+      .then((res) => {
+        if (res.ok) {
+          return res.json();
+        }
+      })
+      .catch((error) => console.log("Error", error));
+  }
 }
 export const api = new Api("https://around-api.es.tripleten-services.com/v1/", {
   authorization: "5cb824c7-18ee-4a7f-a0d4-afa785bcbcee",
