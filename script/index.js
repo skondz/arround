@@ -37,12 +37,13 @@ api.getUserInfo().then((data) => {
       {
         items: card,
         renderer: (item) => {
-          const card = new Card(item, item, () => {
+          const card = new Card(item, item, currentUser, () => {
             popupWithImg.open(item.name, item.link);
           });
           const newCard = card.generateCard();
           section.addItem(newCard);
-          console.log();
+          console.log(currentUser);
+          console.log(item.owner);
         },
       },
       ".cards"

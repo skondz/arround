@@ -23,9 +23,6 @@ export class Card {
     this._cardImage.src = this._link;
     this._cardImage.name = this._name;
     this._cardname.textContent = this._name;
-    if (this._currentUser === this._owner) {
-      this._deleteBtn.style.diplay = "none";
-    }
   }
   _handleLike() {
     this._likeBtn.classList.toggle("card__btn-like-active");
