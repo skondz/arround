@@ -86,7 +86,6 @@
     line-height: 27px;
     margin: 0 50px 14px 0;
     text-align: left;
-
   }
   .profile__btn-edit {
     width: 17.2px;
@@ -106,6 +105,7 @@
     max-height: 50px;
     margin: 22px auto auto auto;
     padding: 12.4px 50px;
+  }
 }
 @media screen and (max-width: 580px) {
   .profile {
