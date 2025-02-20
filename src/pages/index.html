@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="Arround The U.S." />
+    <meta name="author" content="Fernando Escobar" />
+    <meta name="keywords" content="HTML, CSS, JavaScript, Sprint_5, skondz" />
+    <title>Arround The U.S.</title>
+    <link rel="stylesheet" href="./index.css" />
+    <link rel="shortcut icon" href="../../Favicon 7.svg" />
+  </head>
+  <body class="page">
+    f
+    <header class="header">
+      <img
+        src="../images/Logo.png"
+        alt="Logo Arround the U.S."
+        class="header__logo"
+      />
+    </header>
+    <main>
+      <section class="profile">
+        <div class="profile__container">
+          <img
+            src="../images/Avatar.jpg"
+            alt="imagen de perfil"
+            class="profile__avatar"
+          />
+        </div>
+        <div class="profile__info">
+          <h1 class="profile__name"></h1>
+          <img
+            src="../images/EditButton.svg"
+            alt="boton para editar"
+            class="profile__btn-edit"
+          />
+          <h2 class="profile__about"></h2>
+        </div>
+        <img
+          src="../images/addButton.svg"
+          alt="boton de agregar"
+          class="profile__btn-add"
+        />
+      </section>
+      <section class="cards"></section>
+    </main>
+    <footer class="footer">
+      <p class="footer__copyright">&copy;2024 Skondz</p>
+    </footer>
+
+    <!-- popup -->
+    <div class="popup" id="popup__profile">
+      <div class="popup__overlay"></div>
+      <div class="popup__container">
+        <button class="popup__btn-close" id="close-profile"></button>
+        <form class="popup__form" id="form-profile" novalidate>
+          <p class="popup__title">Edit profile</p>
+          <fieldset class="popup__fieldset">
+            <input
+              type="text"
+              class="popup__input popup__input-first"
+              id="input-name"
+              name="nombre"
+              placeholder="Nombre"
+              minlength="2"
+              maxlength="40"
+              required
+            />
+            <span class="input-name-error input-error"></span>
+            <input
+              type="text"
+              class="popup__input"
+              id="input-about"
+              name="about"
+              placeholder="Acerca de mi"
+              required
+              minlength="2"
+              maxlength="400"
+            />
+            <span class="input-about-error input-error"></span>
+
+            <button class="popup__button popup__btn-save" type="submit">
+              Guardar
+            </button>
+          </fieldset>
+        </form>
+      </div>
+    </div>
+
+    <!-- PopUp Add Image -->
+    <div class="popup" id="popup__add">
+      <div class="popup__overlay"></div>
+      <div class="popup__container">
+        <button class="popup__btn-close" id="close-add"></button>
+        <form class="popup__form" id="form-add" novalidate>
+          <p class="popup__title">Nuevo Lugar</p>
+          <fieldset class="popup__fieldset">
+            <input
+              type="text"
+              class="popup__input popup__input-first"
+              id="input-title"
+              name="name"
+              placeholder="Titulo"
+              required
+              minlength="2"
+              maxlength="40"
+            />
+            <span class="input-title-error input-error"></span>
+
+            <input
+              type="url"
+              class="popup__input"
+              id="input-link"
+              name="link"
+              placeholder="Enlace a la imagen"
+              required
+              minlength="2"
+              maxlength="200"
+            />
+            <span class="input-link-error input-error"></span>
+
+            <button class="popup__button popup__btn-create" type="submit">
+              Crear
+            </button>
+          </fieldset>
+        </form>
+      </div>
+    </div>
+    <!-- PopUp Image -->
+    <div class="popup" id="popup__img">
+      <div class="popup__overlay"></div>
+      <div class="popup__container-img">
+        <button class="popup__btn-close" id="close-img"></button>
+        <img src="" alt="" class="popup__img-full" />
+        <p class="popup__img-name"></p>
+      </div>
+    </div>
+
+    <!-- Template -->
+    <template class="template__card">
+      <div class="card">
+        <img src="" alt="" class="card__image" />
+        <div class="card__info">
+          <p class="card__text"></p>
+          <button class="card__btn-delete"></button>
+          <button class="card__btn-like"></button>
+        </div>
+      </div>
+    </template>
+
+    <!-- sripts -->
+    <script src="../script/index.js" type="module"></script>
+  </body>
+</html>
