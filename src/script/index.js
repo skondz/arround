@@ -20,6 +20,9 @@ import {
   album,
   inputAddLink,
   inputAddName,
+  inputProfileAvatar,
+  btnSaveAvatar,
+  popupAvatar,
 } from "./utils.js";
 
 //Iniciar page//
@@ -38,13 +41,17 @@ api.getUserInfo().then((data) => {
       {
         items: card,
         renderer: (item) => {
-          const card = new Card(item, item, currentUser, () => {
-            popupWithImg.open(item.name, item.link);
-          });
+          const card = new Card(
+            item,
+            currentUser,
+            () => {
+              popupWithImg.open(item.name, item.link);
+            },
+            handleLikeCard,
+            handleCardDelete
+          );
           const newCard = card.generateCard();
           section.addItem(newCard);
-          console.log(currentUser);
-          console.log(item.owner);
         },
       },
       ".cards"
@@ -58,12 +65,15 @@ api.getUserInfo().then((data) => {
 // popups
 
 //profile
-const openPopupProfile = new PopupWithForm("#popup__profile", saveChanges);
+const openPopupProfile = new PopupWithForm("#popup__profile", updateUser);
 
 //add
 const openPopupAdd = new PopupWithForm("#popup__add", (values) =>
   newCard(values)
 );
+
+//Avatar
+const openPopupAvatar = new PopupWithForm("#popup__avatar", updateAvatar);
 
 //Image
 const popupWithImg = new PopupWithImage("#popup__img");
@@ -71,6 +81,7 @@ popupWithImg.setEventListeners();
 //Validate
 const validateProfile = new FormValidator(popupProfile, validationSettings);
 const validateAdd = new FormValidator(popupAdd, validationSettings);
+const validateAvatar = new FormValidator(popupAvatar, validationSettings);
 
 //open popup add
 btnOpenAdd.addEventListener("click", () => {
@@ -93,16 +104,40 @@ function getUserInfo() {
   });
 }
 
-//Guardar Info
+//open popup avatar
+profileAvatar.addEventListener("click", () => {
+  openPopupAvatar.open();
+  openPopupAvatar.setEventListeners();
+  validateAvatar.enableValidation();
+});
 
-function saveChanges() {
+//Guardar Info
+function updateAvatar() {
+  const newAvatar = inputProfileAvatar.value;
+  btnSaveAvatar.textContent = "Guardando...";
+  api
+    .updateUserAvatar(newAvatar)
+    .then((data) => {
+      profileAvatar.src = data.avatar;
+    })
+    .catch((err) => {
+      console.log("Error", err);
+    })
+    .finally(() => {
+      btnSaveAvatar.textContent = "Guardar";
+      openPopupAvatar.close();
+    });
+}
+
+function updateUser() {
   const newName = inputProfileName.value;
   const newAbout = inputProfileAbout.value;
   btnSaveProfile.textContent = "Guardando...";
 
   api
-    .modifyUserInfo(newName, newAbout)
+    .updateUserInfo(newName, newAbout)
     .then((data) => {
+      console.log(data);
       profileName.textContent = data.name;
       profileAbout.textContent = data.about;
     })
@@ -119,9 +154,15 @@ function saveChanges() {
 
 //Instanciar class
 const createCard = (data) => {
-  return new Card(data, () => {
-    popupWithImg.open(data.name, data.link);
-  }).generateCard();
+  return new Card(
+    data,
+    currentUser,
+    () => {
+      popupWithImg.open(data.name, data.link);
+    },
+    handleLikeCard,
+    handleCardDelete
+  ).generateCard();
 };
 
 //renderizar
@@ -143,4 +184,16 @@ function newCard() {
       btnCreateAdd.textContent = "Guardar";
       openPopupAdd.close();
     });
+}
+//Eliminar Cartas
+function handleCardDelete(cardId, callback) {
+  return api.deleteCard(cardId).then(() => {
+    callback;
+  });
+}
+
+function handleLikeCard(card) {
+  return api.likeCard(card._id, card._isLiked).then((update) => {
+    console.log("hola");
+  });
 }

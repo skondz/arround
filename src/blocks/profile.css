@@ -107,7 +107,7 @@
     padding: 12.4px 50px;
   }
 }
-@media screen and (max-width: 580px) {
+@media screen and (max-width: 640px) {
   .profile {
     max-width: 282px;
     height: 286px;
@@ -127,6 +127,7 @@
     height: 22px;
     font-size: 22px;
     line-height: 27px;
+    text-align: center;
     margin: 0 auto 14px auto;
   }
   .profile__about {

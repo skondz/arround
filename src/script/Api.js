@@ -21,7 +21,7 @@ class Api {
       })
       .catch((error) => console.log("Error", error));
   }
-  modifyUserInfo(name, about) {
+  updateUserInfo(name, about) {
     return fetch(`${this._baseUrl}/users/me`, {
       method: "PATCH",
       headers: { ...this._headers, "Content-Type": "application/json" },
@@ -47,11 +47,37 @@ class Api {
       })
       .catch((error) => console.log("Error", error));
   }
+  deleteCard(cardId) {
+    return fetch(`${this._baseUrl}/cards/${cardId}`, {
+      method: "DELETE",
+      headers: { ...this._headers, "Content-Type": "application/json" },
+    })
+      .then((res) => {
+        if (res.ok) {
+          return res.json();
+        }
+      })
+      .catch((error) => console.log("Error", error));
+  }
   likeCard(cardId, isLiked) {
-    const method = isLiked ? "PUT" : "DELETE";
-    return fetch(`${this._baseUrl}/cards/likes/${cardId}`, {
+    const method = isLiked ? "DELETE" : "PUT";
+    return fetch(`${this._baseUrl}/cards/${cardId}/likes`, {
       method: method,
       headers: this._headers,
+    })
+      .then((res) => {
+        if (!res.ok) throw new Error(`Server error: ${res.status}`);
+        return res.json();
+      })
+      .catch((error) => {
+        console.error("Error: can't apply like", error);
+      });
+  }
+  updateUserAvatar(avatar) {
+    return fetch(`${this._baseUrl}/users/me/avatar`, {
+      method: "PATCH",
+      headers: { ...this._headers, "Content-Type": "application/json" },
+      body: JSON.stringify({ avatar }),
     })
       .then((res) => {
         if (res.ok) {

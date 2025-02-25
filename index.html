@@ -8,7 +8,7 @@
     <meta name="keywords" content="HTML, CSS, JavaScript, Sprint_5, skondz" />
     <title>Arround The U.S.</title>
     <link rel="stylesheet" href="./index.css" />
-    <link rel="shortcut icon" href="../../Favicon 7.svg" />
+    <link rel="shortcut icon" href="./Favicon 7.svg" />
   </head>
   <body class="page">
     <header class="header">
@@ -126,6 +126,7 @@
         </form>
       </div>
     </div>
+
     <!-- PopUp Image -->
     <div class="popup" id="popup__img">
       <div class="popup__overlay"></div>
@@ -133,6 +134,53 @@
         <button class="popup__btn-close" id="close-img"></button>
         <img src="" alt="" class="popup__img-full" />
         <p class="popup__img-name"></p>
+      </div>
+    </div>
+
+    <!--PopUp Confirmation-->
+    <div class="popup" id="popup__confirmation">
+      <div class="popup__overlay"></div>
+      <div class="popup__container">
+        <button class="popup__btn-close" id="close-confirmation"></button>
+        <form
+          class="popup__form popup__confirmation"
+          id="form-confirmation"
+          novalidate
+        >
+          <p class="popup__title">¿Estas Seguro?</p>
+          <fieldset class="popup__fieldset popup__fieldset-confirmation">
+            <button class="popup__button popup__btn-confirmation" type="submit">
+              Si
+            </button>
+          </fieldset>
+        </form>
+      </div>
+    </div>
+
+    <!--PopUp Avatar-->
+    <div class="popup" id="popup__avatar">
+      <div class="popup__overlay"></div>
+      <div class="popup__container">
+        <button class="popup__btn-close" id="close-avatar"></button>
+        <form class="popup__form popup__avatar" id="form-avatar" novalidate>
+          <p class="popup__title">Cambiar foto de perfil</p>
+          <fieldset class="popup__fieldset">
+            <input
+              type="url"
+              class="popup__input"
+              id="input-avatar"
+              name="avatar"
+              placeholder="Enlace a la imagen"
+              required
+              minlength="2"
+              maxlength="200"
+            />
+            <span class="input-avatar-error input-error"></span>
+            <button class="popup__button popup__btn-change" type="submit">
+              Guardar
+            </button>
+          </fieldset>
+        </form>
       </div>
     </div>
 
