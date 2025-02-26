@@ -107,10 +107,12 @@
     padding: 12.4px 50px;
   }
 }
+
+/* pequeño */
 @media screen and (max-width: 640px) {
   .profile {
     max-width: 282px;
-    height: 286px;
+    height: 306px;
     align-content: center;
     flex-direction: column;
   }
