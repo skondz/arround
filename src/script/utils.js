@@ -10,6 +10,7 @@ const inputProfileAbout = document.querySelector("#input-about");
 const inputProfileAvatar = document.querySelector("#input-avatar");
 const btnSaveAvatar = document.querySelector(".popup__btn-change");
 const popupAvatar = document.querySelector("#popup__avatar");
+const btnOpenAvatar = document.querySelector(".profile__avatar-overlay");
 
 //Add
 const btnOpenAdd = document.querySelector(".profile__btn-add");
@@ -21,6 +22,7 @@ const album = document.querySelector(".cards");
 
 //Card
 const popupFullImg = document.querySelector("#popup__img");
+const popupDelete = document.querySelector("#popup__confirmation");
 
 //validation
 const validationSettings = {
@@ -52,4 +54,6 @@ export {
   inputProfileAvatar,
   btnSaveAvatar,
   popupAvatar,
+  btnOpenAvatar,
+  popupDelete,
 };

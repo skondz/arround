@@ -23,6 +23,7 @@ import {
   inputProfileAvatar,
   btnSaveAvatar,
   popupAvatar,
+  btnOpenAvatar,
 } from "./utils.js";
 
 //Iniciar page//
@@ -73,7 +74,10 @@ const openPopupAdd = new PopupWithForm("#popup__add", (values) =>
 );
 
 //Avatar
-const openPopupAvatar = new PopupWithForm("#popup__avatar", updateAvatar);
+export const openPopupAvatar = new PopupWithForm(
+  "#popup__avatar",
+  updateAvatar
+);
 
 //Image
 const popupWithImg = new PopupWithImage("#popup__img");
@@ -105,7 +109,7 @@ function getUserInfo() {
 }
 
 //open popup avatar
-profileAvatar.addEventListener("click", () => {
+btnOpenAvatar.addEventListener("click", () => {
   openPopupAvatar.open();
   openPopupAvatar.setEventListeners();
   validateAvatar.enableValidation();
@@ -176,9 +180,6 @@ function newCard() {
     .getNewCard(inputAddName.value, inputAddLink.value)
     .then((cardData) => {
       renderCard(cardData, album);
-    })
-    .catch((err) => {
-      console.log("Error", err);
     })
     .finally(() => {
       btnCreateAdd.textContent = "Guardar";
