@@ -54,7 +54,7 @@ export class Card {
     this._likeBtn.addEventListener("click", () => this._handleLike());
 
     this._deleteBtn.addEventListener("click", () =>
-      this._handleCardDelete(this._id, this._card.remove())
+      this._handleCardDelete(this)
     );
     this._cardImage.addEventListener("click", () => this._handleCardClick());
   }

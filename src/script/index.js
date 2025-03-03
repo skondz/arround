@@ -2,6 +2,7 @@ import { FormValidator } from "./FormValidator.js";
 import { Section } from "./Section.js";
 import { PopupWithForm } from "./PopupWithForm.js";
 import { PopupWithImage } from "./PopupWithImage.js";
+import { PopupWithConfirmation } from "./PopupWithConfirmation.js";
 import { Card } from "./Card.js";
 import { api } from "./Api.js";
 import {
@@ -49,7 +50,7 @@ api.getUserInfo().then((data) => {
               popupWithImg.open(item.name, item.link);
             },
             handleLikeCard,
-            handleCardDelete
+            handleDeleteClick
           );
           const newCard = card.generateCard();
           section.addItem(newCard);
@@ -82,6 +83,24 @@ export const openPopupAvatar = new PopupWithForm(
 //Image
 const popupWithImg = new PopupWithImage("#popup__img");
 popupWithImg.setEventListeners();
+
+// Confirmation
+const popupWithConfirm = new PopupWithConfirmation("#popup__confirmation");
+popupWithConfirm.setEventListeners();
+
+function handleDeleteClick(card) {
+  popupWithConfirm.open();
+  popupWithConfirm.setSubmitAction(() => {
+    api
+      .deleteCard(card._id)
+      .then(() => {
+        card._handleDelete();
+        popupWithConfirm.close();
+      })
+      .catch((err) => console.log(`Error al eliminar la tarjeta: ${err}`));
+  });
+}
+
 //Validate
 const validateProfile = new FormValidator(popupProfile, validationSettings);
 const validateAdd = new FormValidator(popupAdd, validationSettings);
@@ -165,7 +184,7 @@ const createCard = (data) => {
       popupWithImg.open(data.name, data.link);
     },
     handleLikeCard,
-    handleCardDelete
+    handleDeleteClick
   ).generateCard();
 };
 
